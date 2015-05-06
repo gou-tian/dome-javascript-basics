@@ -37,7 +37,7 @@
                 oUl.innerHTML += '<li>' + i + '</li>';
                 var aLi = oUl.getElementsByTagName('li');
                 aLi[i].style.left = i * 60 + 'px';
-                aLi[i].style.background = arr[i];
+                aLi[i].style.background = arr[i % 3] ;
             }
 
         }
