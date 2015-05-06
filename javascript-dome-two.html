@@ -21,10 +21,14 @@
             var oBack = document.getElementById('back');
             var oNext = document.getElementById('next');
 
+            var oBut = document.getElementById('but1');
+            var oBut1 = document.getElementById('but2');
+
             var arrUrl = ['pic/101.jpg','pic/102.jpg','pic/103.jpg','pic/104.jpg'];
             var arrTxt = ['图片一','图片二','图片三','图片四'];
 
             var num = 0;
+            var onOff = false;
 
             //初始化数据
             function fn(){
@@ -33,11 +37,21 @@
                 oStr.innerHTML = arrTxt[num];
             }
             fn();
+            oBut.onclick = function(){
+                onOff = true;
+            };
+            oBut1.onclick = function(){
+                onOff = false;
+            };
             oBack.onclick = function(){
                 num--;
                 if(num == -1){
-                    num = arrUrl.length-1;
-                    fn();
+                    if(onOff){
+                        num = arrUrl.length-1;
+                        fn();
+                    }else{
+                        num = 0;
+                    }
                 }else if(num != arrUrl.length){
                     fn();
                 }
@@ -47,17 +61,22 @@
                 if(num < arrUrl.length){
                     fn();
                 }else if(num == arrUrl.length){
-                    num = 0;
-                    fn();
+                    if(onOff){
+                        num = 0;
+                        fn();
+                    }else{
+                        num = arrUrl.length-1;
+                    }
                 }
             };
-
         }
     </script>
 </head>
 <body>
 <label>
     <input id="but1" type="button" value="循环切换"/>
+</label>
+<label>
     <input id="but2" type="button" value="顺序切换"/>
 </label>
     <div id="pic">
