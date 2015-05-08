@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>自动生成是个100Li</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            float: left;
+            margin: 10px auto 0;
+            position: relative;
+            left: 25%;
+        }
+        li {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            display: inline-block;
+            color: #ffffff;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById('dome-ul');
+            var arr = ['red','blue','green'];
+            var str = '';
+
+            for(var i=0; i<100; i++){
+                str += '<li style="top:'+ Math.floor(i/10) * 30 +'px; left: '+ i%10 * 30 +'px; background-color:'+ arr[i % arr.length]+'">' + i + '</li>';
+                console.log(i%arr.length)
+            }
+            oUl.innerHTML = str;
+        }
+    </script>
+</head>
+
+<body>
+<ul id="dome-ul">
+    <!--<li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>-->
+
+</ul>
+</body>
+</html>
