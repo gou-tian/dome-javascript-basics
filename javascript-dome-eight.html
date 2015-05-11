@@ -45,7 +45,7 @@
         var num = 0;
         var num1 = 0;
 
-        //初始化数据
+        //初始化数据。fn和fn1两个函数分别初始化两组图片。
         function fn(){
             aSpan.innerHTML = num + 1 + '/' + arrUrl.length;
             aImg.src = arrUrl[num];
@@ -60,19 +60,24 @@
         fn1();
         //Back按钮
         oBack.onclick = function(){
+            //建立索引
             num--;
             num1--;
             if(num<0){
+                //判断num的值，如果小于0则等于arrUrl数组的最后一个。
                 num = arrUrl.length-1;
+                //同时判断num1的值，如果小于0则等于arrUrl1数组的最后一个。
                 if(num1<0){
                     num1 = arrUrl1.length-1;
                     fn1();
                 }else{
+                    //如果不小于0则执行函数fn1.
                     fn1();
                 }
                 fn();
                 fn1();
             }else{
+                //如果上面条件都不满足则执行下面的两个函数的同时判断num1的值是否小于0.
                 if(num1<0){
                     num1 = arrUrl1.length-1;
                     fn1();
@@ -95,18 +100,20 @@
                     num1 = 0;
                     fn1();
                 }
+            // 当num和num1的值同时等于两个数组的长度时两个变量同时归零。
             }else if(num == arrUrl.length && num1 == arrUrl1.length){
                 num = 0;
                 num1 = 0;
                 fn();
                 fn1();
             }else{
+                //num值大于数组arrUrl时num归零并且执行下面两个函数。
                 num = 0;
                 fn();
                 fn1();
             }
         };
-
+        //为两组图片加点击事件
         aImg.onclick = function(){
             num++;
             if(num<arrUrl.length){
