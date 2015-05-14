@@ -26,8 +26,8 @@
 
             //找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5
             for(var i = 0; i < arr.length; i++){
-
-                if('number' && parseFloat(arr[i])){
+                console.log(parseFloat(0))
+                if('number' && parseInt(arr[i])){
                     st += '<span>' + arr[i] + '</span>'+ '、';
                 }
                 //console.log( 'number' && parseFloat(arr[i]))
