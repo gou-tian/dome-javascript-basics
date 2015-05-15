@@ -51,17 +51,27 @@
             var oEm = oUl.getElementsByTagName('em');
             var oSpan = oUl.getElementsByTagName('span');
             var oMore = document.getElementById('more');
-            var leg = 0;
-            var num = 0;
-            var aEm = 0;
-            for(var i = 0; i < oStrong.length; i++){
-                leg += parseFloat(oStrong[i].innerHTML);
-                num += parseFloat(oSpan[i].innerHTML);
-                if(oEm[i] < 0){
-                    oEm[i] = aEm;
+
+            var numb = 0;
+            var money = 0;
+            var hei = 0;
+            var arr = [];
+
+            for (var i = 0; i < oStrong.length; i++) {
+                numb += parseFloat(oStrong[i].innerHTML);
+                money += parseFloat(oSpan[i].innerHTML);
+                if(oStrong[i].innerHTML > 0){
+                    arr[i] = parseFloat(oEm[i].innerHTML);
+                }else{
+                    arr[i] = 0;
                 }
             }
-            oMore.innerHTML =  '<p>' + '商品合计共：' + leg + '件,共花费了：' + num  + '元' + '<br/>' + '其中最贵的商品单价是：' + aEm +'元' + '</p>' ;
+            for(var i = 0; i<arr.length; i++){
+                if(hei < arr[i]){
+                    hei = arr[i]
+                }
+            }
+            oMore.innerHTML =  '<p>' + '商品合计共：' + numb + '件,共花费了：' + money  + '元' + '<br/>' + '其中最贵的商品单价是：' + hei +'元' + '</p>' ;
         }
     }
 </script>
