@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>修改文本框的值</title>
+    <style>
+        * { margin:0; padding:0; font-size: 14px;}
+        li { list-style: none;}
+        #moue { width: 300px; height: 50px; margin: 0 auto; position: relative; top: 30px;}
+        #moue h3 { background-color: greenyellow; line-height: 30px; text-indent: 2em;}
+        #moue p { float:left; width: 240px; line-height: 26px}
+        #moue span { margin-left: 14px; font-size: 12px; cursor: pointer; border: 1px solid darkblue;float:left;line-height: 26px}
+        .text,.but { display: none;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oMoue = document.getElementById('moue');
+            var oLi = oMoue.getElementsByTagName('li');
+            for(var i = 0; i < oLi.length; i++){
+                fn(oLi[i])
+            }
+
+            function fn(obj){
+                var oP = obj.getElementsByTagName('p')[0];
+                var oTxt = obj.getElementsByTagName('input')[0];
+                var oBut = obj.getElementsByTagName('input')[1];
+                var oEdit = obj.getElementsByTagName('input')[2];
+                //console.log(oEdit)
+                oEdit.onclick = function(){
+                    oP.style.display = 'none';
+                    oTxt.style.display = 'block';
+                    oBut.style.display = 'block';
+                    oEdit.style.display = 'none';
+                };
+                oBut.onclick = function(){
+                    oP.innerHTML = oTxt.value;
+                    oP.style.display = 'block';
+                    oTxt.style.display = 'none';
+                    oBut.style.display = 'none';
+                    oEdit.style.display = 'block';
+                    oTxt.value = '';
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="moue">
+        <h3>分类名称</h3>
+        <ul>
+            <li>
+                <p>分类标题一</p>
+                <input type="text" class="text" />
+                <input type="button" value="保存" class="but" />
+                <input type="button" value="修改" class="edit" />
+            </li>
+            <li>
+                <p>分类标题二</p>
+                <input type="text" class="text" />
+                <input type="button" value="保存" class="but" />
+                <input type="button" value="修改" class="edit" />
+            </li>
+            <li>
+                <p>分类标题三</p>
+                <input type="text" class="text" />
+                <input type="button" value="保存" class="but" />
+                <input type="button" value="修改" class="edit" />
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
