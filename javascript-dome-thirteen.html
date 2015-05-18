@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>搜狐视频记录片列表展示</title>
+    <style>
+        * { margin:0; padding:0;}
+        li { list-style:none;}
+        #tag {
+            width: 261px;
+            background: lawngreen;
+            margin: 30px auto 0;
+            zoom: 1;
+        }
+        #tag:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #tag h2 {
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 16px;
+            float: left;
+        }
+        #tag .list {
+            width: 150px;
+            height: 30px;
+            float: left;
+            margin-left: 10px;
+        }
+        #tag .list li {
+            line-height: 30px;
+            float: left;
+            padding: 0 5px;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+            border-left: 1px solid #ffffff;
+            border-right: 1px solid #ffffff;
+        }
+        #tag .list .hover { border-bottom: 1px solid lawngreen;}
+
+        .tag-list {
+            position: relative;
+            width: 238px;
+            float: left;
+            margin-left: 1px;
+            border-top: 1px solid #ffffff;
+            display: none;
+        }
+        .tag-list li {
+            cursor: pointer;
+        }
+        .tag-list h3 {
+            font-size: 14px;
+            line-height: 30px;
+            text-indent: 1em;
+        }
+        .tag-list p {
+            float: left;
+            margin-left: 4px;
+            display: none;
+        }
+        .tag-list img {
+            width: 100px;
+            height: 50px;
+            float: left;
+        }
+        .tag-list span {
+            font-size: 12px;
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oTag = document.getElementById('tag');
+            var oLi = oTag.getElementsByTagName('ul')[0].getElementsByTagName('li');
+            var oList = oTag.getElementsByTagName('div');
+
+            for(var i=0; i<oLi.length; i++){
+                oLi[i].index = i;
+                oLi[i].onmouseover = function(){
+                    for(var i=0; i<oLi.length; i++){
+                        oLi[i].className = '';
+                        oList[i].style.display = 'none';
+                    }
+                    oLi[this.index].className = 'hover';
+                    oList[this.index].style.display = 'block';
+                };
+                liTag(oList[i]);
+            }
+            function liTag(obj){
+                var aLi = obj.getElementsByTagName('li');
+                var oTxt = obj.getElementsByTagName('p');
+                for(var i=0; i<aLi.length; i++){
+                    aLi[i].index = i;
+                    aLi[i].onmouseover = function(){
+                        for(var i=0; i<aLi.length; i++){
+                            oTxt[i].style.display = 'none';
+                        }
+                        oTxt[this.index].style.display = 'block';
+                    }
+                }
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="tag">
+        <h2>观看排行榜</h2>
+        <ul class="list">
+            <li class="hover">每日</li>
+            <li>每周</li>
+            <li>每月</li>
+        </ul>
+        <div class="tag-list" style="display: block;">
+            <ul>
+                <li>
+                    <h3>乐安：孕妇当街惨遭前夫疯狂砍杀</h3>
+                    <p>
+                        <img src="pic/200.jpg" alt="" />
+                        <span>乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>公交司机边关门边起步 女童腿部被</h3>
+                    <p>
+                        <img src="pic/201.jpg" alt="" />
+                        <span>公交司机边关门边起步 女童腿部被门夹住遭碾压公交司机边关门边起步 女童腿部被门夹住遭碾压</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>监拍退票男子塞“救命”字条 售票</h3>
+                    <p>
+                        <img src="pic/202.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>攀枝花三男子逗2岁男孩喝酒致死</h3>
+                    <p>
+                        <img src="pic/203.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="tag-list">
+            <ul>
+                <li>
+                    <h3>公交司机边关门边起步 女童腿部被</h3>
+                    <p>
+                        <img src="pic/201.jpg" alt="" />
+                        <span>公交司机边关门边起步 女童腿部被门夹住遭碾压公交司机边关门边起步 女童腿部被门夹住遭碾压</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>乐安：孕妇当街惨遭前夫疯狂砍杀</h3>
+                    <p>
+                        <img src="pic/200.jpg" alt="" />
+                        <span>乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>监拍退票男子塞“救命”字条 售票</h3>
+                    <p>
+                        <img src="pic/202.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>攀枝花三男子逗2岁男孩喝酒致死</h3>
+                    <p>
+                        <img src="pic/203.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="tag-list">
+            <ul>
+                <li>
+                    <h3>监拍退票男子塞“救命”字条 售票</h3>
+                    <p>
+                        <img src="pic/202.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>乐安：孕妇当街惨遭前夫疯狂砍杀</h3>
+                    <p>
+                        <img src="pic/200.jpg" alt="" />
+                        <span>乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍乐安：孕妇当街惨遭前夫疯狂砍杀 全程被监拍</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>公交司机边关门边起步 女童腿部被</h3>
+                    <p>
+                        <img src="pic/201.jpg" alt="" />
+                        <span>公交司机边关门边起步 女童腿部被门夹住遭碾压公交司机边关门边起步 女童腿部被门夹住遭碾压</span>
+                    </p>
+                </li>
+                <li>
+                    <h3>攀枝花三男子逗2岁男孩喝酒致死</h3>
+                    <p>
+                        <img src="pic/203.jpg" alt="" />
+                        <span>监拍退票男子塞“救命”字条 售票员机智解救监拍退票男子塞“救命”字条 售票员机智解救</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
