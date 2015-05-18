@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>选择卡里套选择卡</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        li { list-style: none;}
+        /* 选项卡 */
+        .tag { width: 100px; position: relative; left: 150px; top: 50px;}
+        .tag li { height: 50px; line-height: 50px;text-align: center; background-color: royalblue; color: #fff; cursor: pointer;}
+        .tag .hover { background-color: #191970;}
+        /* 选项卡内容 */
+        .slide { width: 300px; height: 200px; position: absolute; left: 250px; top: 50px; display: none;}
+        .slide img { width: 300px; height: 200px;}
+        .slide ul { position: absolute; bottom: 0; width: 300px; background: rgba(0,0,0,0.6);}
+        .slide li { height: 30px; line-height: 30px; color: #fff; padding: 0 4px; display: inline-block; font-size: 12px; cursor: pointer;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oTag = document.getElementById('J-tag');
+            var aLi = oTag.getElementsByTagName('li');
+            var oDiv = document.getElementsByTagName('div');
+
+            for(var j=1; j<oDiv.length; j++){
+                fn(oDiv[j]);
+            }
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    for(var i=0; i<aLi.length; i++){
+                        aLi[i].className = '';
+                        oDiv[i+1].style.display = 'none';
+                    }
+                    aLi[this.index].className = 'hover';
+                    oDiv[this.index+1].style.display = 'block';
+                };
+            }
+
+            function fn(obj){
+                var aLi = obj.getElementsByTagName('li');
+                var aIm = obj.getElementsByTagName('img')[0];
+                var imgSrc = ['pic/101.jpg','pic/102.jpg','pic/103.jpg','pic/104.jpg'];
+                var num = 0;
+                console.log(aIm);
+                aIm.src = imgSrc[num];
+                for(var i=0; i<aLi.length; i++){
+                    aLi[i].index = i;
+                    aLi[i].onmouseover = function(){
+                        for(var i=0; i<aLi.length; i++){
+                            if(num = aLi[i]){
+                                aIm.src = imgSrc[num];
+                            }
+                        }
+                        aIm.src = imgSrc[this.index];
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="tag" id="J-tag">
+        <ul>
+            <li>选项卡一</li>
+            <li>选项卡二</li>
+            <li>选项卡三</li>
+            <li>选项卡四</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <img src="" alt="" />
+        <ul>
+            <li>图片标题一</li>
+            <li>图片标题二</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <img src="" alt="" />
+        <ul>
+            <li>图片标题一</li>
+            <li>图片标题二</li>
+            <li>图片标题三</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <img src="" alt="" />
+        <ul>
+            <li>图片标题一</li>
+            <li>图片标题二</li>
+            <li>图片标题三</li>
+            <li>图片标题四</li>
+        </ul>
+    </div>
+    <div class="slide">
+        <img src="" alt="" />
+        <ul>
+            <li>图片标题一</li>
+            <li>图片标题二</li>
+        </ul>
+    </div>
+</body>
+</html>
