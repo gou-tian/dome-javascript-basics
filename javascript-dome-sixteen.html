@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>百度音乐-全选操作</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        li { list-style: none;}
+        #checkbox { width: 150px; position: relative; top: 30px; left: 300px;}
+        #checkbox li { line-height: 30px;}
+        #checkbox input { margin-right: 10px;}
+        #lab { position: absolute; top: 150px; left: 300px; width: 100px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oCheck = document.getElementById('checkbox');
+            var oBut = document.getElementById('but');
+
+            checkbox(oCheck,oBut);
+
+            function checkbox(obj,obj1){
+                var aInp = obj.getElementsByTagName('input');
+                var aLi = obj.getElementsByTagName('li');
+                var arr = ['#ccc','#999'];
+                var old = '';
+
+                for(var i = 0; i< aInp.length; i++){
+                    aInp[i].index = i;
+                    aLi[i].style.backgroundColor = arr[i % arr.length];
+                    obj1.onclick = function(){
+                        for(var i = 0; i< aInp.length; i++){
+                            if(aInp[i].checked == true){
+                                aInp[i].checked = !aInp[i].checked;
+                                aLi[i].style.backgroundColor = arr[i % arr.length];
+                            }else{
+                                aInp[i].checked = true;
+                                aLi[i].style.backgroundColor = 'red';
+                            }
+                        }
+                    };
+                    aInp[i].onclick = function(){
+
+                        for(var i = 0; i < aInp.length; i++) {
+                            if( aInp[this.index].checked ){
+                                if(this.index < aInp.length-1){
+                                    if(aInp[i].checked !== true){
+                                        obj1.checked = false;
+                                        return ;
+                                    }else{
+                                        obj1.checked = true;
+                                    }
+                                }else if(this.index === aInp.length-1){
+                                    if(aInp[i].checked === false){
+                                        obj1.checked = false;
+                                        return ;
+                                    }else{
+                                        obj1.checked = true;
+                                    }
+                                }
+                            }else{
+                                obj1.checked = false;
+                            }
+                        }
+                    };
+                    aLi[i].onmouseover = function(){
+                        old = this.style.backgroundColor;
+                        this.style.backgroundColor = 'red';
+                    };
+                    aLi[i].onmouseout = function(){
+                        this.style.backgroundColor = old;
+                    };
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="checkbox">
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" />列表一
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" />列表二
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" />列表三
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" />列表四
+                </label>
+            </li>
+        </ul>
+
+    </div>
+    <label id="lab">
+        <input type="checkbox" id="but" />全选/反选
+    </label>
+</body>
+</html>
