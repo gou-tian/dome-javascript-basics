@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>按钮控制商品图片上下滚动</title>
+    <style>
+        body,p,ul { margin: 0; padding: 0;}
+        body { font-family: "微软雅黑", "Microsoft Yahei", Arial, "黑体", sans-serif; font-size: 14px;}
+        li { list-style: none;}
+        a { text-decoration: none;}
+        img { vertical-align: middle; border: none;}
+        #back,#next {
+            position: relative;
+            z-index: 999;
+            width: 260px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin: 50px auto 0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: -webkit-linear-gradient(#fff, #ccc); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#fff, #ccc); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#fff, #ccc); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#fff, #ccc); /* 标准的语法 */
+        }
+        #next.next-mar { margin-top: 10px;}
+        #tag-pic { width: 260px; height: 228px;/* 332px */ position: relative; top: 5px; bottom: 5px; margin: 0 auto; overflow: hidden;}
+        #tag-pic ul { position: absolute; top: 0; bottom: 0;}
+        #tag-pic li { width: 260px; height: 114px;}
+        #tag-pic li a {display: block;}
+    </style>
+    <script>
+        window.onload = function(){
+            var back = document.getElementById('back');
+            var next = document.getElementById('next');
+            var tagPic = document.getElementById('tag-pic');
+            var tagUl = tagPic.getElementsByTagName('ul')[0];
+            var tagLi = tagPic.getElementsByTagName('li');
+
+            var num = 0;
+            var liOffH = tagLi[0].offsetHeight;
+            var times = null;
+            var iSpeed = 6;
+
+            console.log(tagLi[0].offsetHeight);
+            back.onmousedown = function (){
+                clearInterval(times);
+                times = setInterval(function(){
+                    num+=iSpeed;
+                    if(num > (tagLi.length - 2) * liOffH){
+                        num = (tagLi.length - 2) * liOffH;
+                    }else{
+                        num += iSpeed;
+                    }
+                    console.log(num);
+                    tagUl.style.top = '-' + num + 'px';
+                },30)
+            };
+            next.onmousedown = function(){
+                clearInterval(times);
+                times = setInterval(function(){
+                    num-=iSpeed;
+                    if(num < 0){
+                        num = 0 ;
+                    }else{
+                        num -=iSpeed;
+                    }
+                    tagUl.style.top = '-' + num + 'px';
+                },30)
+            };
+            back.onmouseup = next.onmouseup = function(){
+                clearInterval(times)
+            };
+        }
+    </script>
+</head>
+<body>
+    <p id="back">向上滚动</p>
+    <div id="tag-pic">
+        <ul>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-1.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-2.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-3.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-4.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-5.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-6.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-7.jpg" alt="" />
+                </a>
+            </li>
+            <li>
+                <a href="javascript:">
+                    <img src="pic/30-8.jpg" alt="" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p id="next" class="next-mar">向下滚动</p>
+</body>
+</html>
