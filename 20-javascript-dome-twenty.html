@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>自动轮换选项卡</title>
+    <style>
+        body,p,ul { margin: 0; padding: 0;}
+        body { font-family: "微软雅黑", "Microsoft Yahei", Arial, "黑体", sans-serif; font-size: 14px;}
+        li { list-style: none;}
+        a { text-decoration: none;}
+        img { vertical-align: middle; border: none;}
+        #autoTag { width: 324px; margin: 50px auto 0; position: relative;}
+        #autoTag .auto-tag-tit {width: 322px; height: 30px; line-height: 30px; text-align: center; background-color: royalblue;}
+        #autoTag .auto-tag-tit p { float: left; padding: 0 20px; font-size: 14px; color: #ffffff;}
+        #autoTag .auto-tag-list { width: 324px; height: 114px; display: none;}
+        #autoTag .auto-display { display: block;}
+        #autoTag .auto-tag-list img { width: 260px; height: 114px;}
+        #autoTag .auto-tag-list ul { position: absolute; top: 30px; left: 260px;}
+        #autoTag .auto-tag-list li { height: 38px; line-height: 38px; text-align: center; padding: 0 10px; background-color: #cfcfcf; cursor: pointer;}
+        #autoTag .hover { background-color: cornflowerblue!important; color: #ffffff;}
+    </style>
+    <script>
+        window.onload = function(){
+            var autoTag = document.getElementById('autoTag');
+            var aP = autoTag.getElementsByTagName('p');
+            var oDiv = autoTag.getElementsByTagName('div');
+            var oImg = autoTag.getElementsByTagName('img');
+            var aLi = autoTag.getElementsByTagName('li');
+            var len = aLi.length;
+            var pLen = aP.length;
+
+            var num = 0;
+            var timer = null;
+            var imgUrl = ['pic/30-1.jpg','pic/30-2.jpg','pic/30-3.jpg','pic/30-4.jpg','pic/30-5.jpg','pic/30-6.jpg'];
+
+            setInterval(function(){
+                num++;
+                if(num < imgUrl.length ){
+                    aLi[num].className = 'hover';
+                    aLi[num - 1].className = '';
+                    oImg[0].src = imgUrl[num];
+                    if(num > imgUrl.length / 2 - 1){
+                        aP[0].className = '';
+                        aP[1].className = 'hover';
+                        oImg[1].src = imgUrl[num];
+                        oDiv[1].className = 'auto-tag-list';
+                        oDiv[2].className = 'auto-tag-list ' + 'auto-display';
+                    }
+                }else if(num > imgUrl.length-1){
+                    aLi[imgUrl.length-1].className = '';
+                    num = 0;
+                    aLi[num].className = 'hover';
+                    aP[0].className = 'hover';
+                    aP[1].className = '';
+                    oImg[0].src = imgUrl[num];
+                    oDiv[1].className = 'auto-tag-list '+ 'auto-display';
+                    oDiv[2].className = 'auto-tag-list' ;
+                }
+            },1500);
+        }
+    </script>
+</head>
+<body>
+    <div id="autoTag">
+        <div class="auto-tag-tit">
+            <p class="hover">菜单一</p>
+            <p>菜单二</p>
+        </div>
+        <div class="auto-tag-list auto-display">
+            <img src="pic/30-1.jpg" alt="" />
+            <ul>
+                <li class="hover">图片一</li>
+                <li>图片二</li>
+                <li>图片三</li>
+            </ul>
+        </div>
+        <div class="auto-tag-list">
+            <img src="pic/30-4.jpg" alt="" />
+            <ul>
+                <li class="hover">图片四</li>
+                <li>图片五</li>
+                <li>图片六</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

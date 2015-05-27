@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>淘宝商品广告效果</title>
+    <style>
+        body,p,ul { margin: 0; padding: 0;}
+        body { font-family: "微软雅黑", "Microsoft Yahei", Arial, "黑体", sans-serif; font-size: 14px;}
+        li { list-style: none;}
+        a { text-decoration: none;}
+        img { vertical-align: middle; border: none;}
+        #ad {
+            position: relative;
+            width: 426px;
+            height: 200px;
+            margin: 50px auto 0;
+            border: 1px solid #FF9999;
+        }
+        .ad-left,.ad-right {
+            position: absolute;
+            top: 0;
+        }
+        .ad-left { left: 0;}
+        .ad-right { left: 366px;}
+        .ad-left li,.ad-right li {
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            color: black;
+            border: 1px solid #FF9999;
+            background-color: #FFCCCC;
+        }
+        .ad-right li a,.ad-left li a {
+            display: block;
+            color: #000;
+            padding: 0 8px;
+        }
+        .ad-hover {
+            color: #ffffff!important;
+            background-color: #CC0033!important;
+        }
+        .ad-img {
+            position: absolute;
+            left: 62px;
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var ad = document.getElementById('ad');
+            var adImg = ad.getElementsByTagName('img')[0];
+            var adLi = ad.getElementsByTagName('li');
+
+            var imgUrl = ['pic/10-1.jpg','pic/10-2.jpg','pic/10-3.jpg','pic/10-4.jpg','pic/10-5.jpg','pic/10-6.jpg','pic/10-7.jpg','pic/10-8.jpg'];
+            var num = 0;
+            var len = adLi.length;
+            var timer = null;
+
+            function oNum(){
+                adImg.src = imgUrl[num];
+                adLi[num].className = 'ad-hover';
+            }
+            oNum();
+            timer = setInterval(autoPlay,2000);
+            for(var i = 0; i < len; i++){
+                console.log(i,adLi[i])
+                adLi[i].index = i;
+                adLi[i].onmouseover = function(){
+                    clearInterval(timer);
+                    num = this.index;
+                    mouseOver();
+                };
+                adLi[i].onmouseout = function(){
+                    timer = setInterval(autoPlay,1000);
+                }
+            }
+            function mouseOver(){
+                for(var i = 0; i < len; i++){
+                    adLi[i].className  = '';
+                }
+                oNum();
+            }
+            function autoPlay(){
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    if(num < len / 2 - 1){
+                        num++;
+                    }else if(num > len / 2 - 1 && num  == len - 1){
+                        num--;
+                    }else if(num > len / 2 - 1 && num != len / 2){
+                        num--;
+                    }else{
+                        if(num == len / 2 ){
+                            num = 0;
+                        }else{
+                            num = len - 1;
+                        }
+                    }
+                    mouseOver();
+                },1000)
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="ad">
+        <ul class="ad-left">
+            <li><a href="javascript:">商品一</a></li>
+            <li><a href="javascript:">商品二</a></li>
+            <li><a href="javascript:">商品三</a></li>
+            <li><a href="javascript:">商品四</a></li>
+        </ul>
+        <img src="" class="ad-img" />
+        <ul class="ad-right">
+            <li><a href="javascript:">商品一</a></li>
+            <li><a href="javascript:">商品二</a></li>
+            <li><a href="javascript:">商品三</a></li>
+            <li><a href="javascript:">商品四</a></li>
+        </ul>
+    </div>
+</body>
+</html>

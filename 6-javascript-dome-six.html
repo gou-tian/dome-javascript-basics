@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>简易QQ好用列表</title>
+    <style>
+        * { margin:0; padding:0; font-family: "微软雅黑", "Microsoft Yahei", Arial, "黑体", sans-serif; font-size:14px;}
+        li { list-style:none;}
+        #J-list { width: 150px; margin: 0 auto; position: relative; top: 50px;}
+        #J-list h3 { height: 30px; line-height: 30px; text-align:center; background-color:blue; color:#ffffff; border:1px solid dodgerblue;}
+        #J-list ul { display:none;}
+        #J-list ul li { height:24px; line-height:24px; text-indent:2em; border: 1px solid blueviolet; }
+        #J-list .hover { background-color:royalblue;}
+    </style>
+    <script>
+        window.onload = function() {
+            var oUl = document.getElementById('J-list');
+            var aH3 = oUl.getElementsByTagName('h3');
+            var aUl = oUl.getElementsByTagName('ul');
+            var aLi = '';
+            var oldC = null;
+
+            var arr = [];
+            for (var i = 0; i < aH3.length; i++) {
+                aLi = oUl.getElementsByTagName('ul')[i].getElementsByTagName('li');
+                arr.push(aLi);
+                aH3[i].index = i;
+                //初始化当前元素属性
+                aUl[i].style.display = 'none';
+                //点击显示当前列表
+                aH3[i].onclick = function () {
+                    if (aUl[this.index].style.display == 'none') {
+                        for (var i = 0; i < aH3.length; i++) {
+                            aUl[i].style.display = 'none';
+                        }
+                        aUl[this.index].style.display = 'block';
+                    } else {
+                        aUl[this.index].style.display = 'none';
+                    }
+                };
+            }
+            //给列表内容添加鼠标点击事件
+            for (var j = 0; j < arr.length; j++) {
+                oldC = arr[j];
+                for(var i=0; i<arr[j].length; i++){
+                    oldC[i].onclick = function(){
+                        oldC.className = '';
+                        oldC = this;
+                        this.className = 'hover';
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="J-list">
+        <li class="ss">
+            <h3>我的好友</h3>
+            <ul>
+                <li>张三</li>
+                <li>王四</li>
+                <li>李五</li>
+            </ul>
+        </li>
+        <li>
+            <h3>企业好友</h3>
+            <ul>
+                <li>腾讯</li>
+                <li>阿里</li>
+                <li>百度</li>
+            </ul>
+        </li>
+        <li>
+            <h3>黑名单</h3>
+            <ul>
+                <li>中介</li>
+                <li>诈骗</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

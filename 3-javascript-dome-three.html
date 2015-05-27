@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>自动生成是个Li</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            float: left;
+            margin: 50px auto 0;
+            position: relative;
+        }
+        li {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            padding: 10px;
+            line-height: 30px;
+            text-align: center;
+            display: block;
+            float: left;
+            list-style: none;
+            background: red;
+            border: 1px solid saddlebrown;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById('dome-ul');
+            var arr = ['red','blue','green'];
+            //var str = '';
+
+            for(var i=0; i<10; i++){
+                oUl.innerHTML += '<li>' + i + '</li>';
+                var aLi = oUl.getElementsByTagName('li');
+                aLi[i].style.left = i * 60 + 'px';
+                aLi[i].style.background = arr[i % 3] ;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="dome-ul">
+        <!--<li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>-->
+    </ul>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>延时消失的菜单</title>
+    <style>
+        body,ul { margin: 0; padding: 0;}
+        li { list-style: none;}
+        a { text-decoration: none;}
+        #time { position: relative; width: 304px; margin: 50px auto 0;}
+        #menu {
+            background: -webkit-linear-gradient(#ccc, #dc143c); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#ccc, #dc143c); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#ccc, #dc143c); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#ccc, #dc143c); /* 标准的语法 */
+            zoom: 1;
+        }
+        #menu:after { content: ''; display: block; clear: both;}
+        #menu li,.sub-menu li  { float: left; height: 30px; line-height: 30px; text-align: center;}
+        #menu li a { padding: 0 18px; color: #fff; display: block;}
+        #menu .hover { background: #bc8f8f;}
+        .sub-menu {
+            position: absolute;
+            top: 30px;
+            display: none;
+        }
+        .sub-menu li {
+            float: left;
+            line-height: 30px;
+            text-align: center;
+            background: #bc8f8f;
+        }
+        .sub-menu li a {
+            color: #ffffff;
+            padding: 0 18px;
+        }
+        .sub-menu .hover {
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: -webkit-linear-gradient(#ccc, #dc143c)!important; /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#ccc, #dc143c)!important; /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#ccc, #dc143c)!important; /* Firefox 3.6 - 15 */
+            background: linear-gradient(#ccc, #dc143c)!important; /* 标准的语法 */
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oTim = document.getElementById('time');
+            var oUl = oTim.getElementsByTagName('ul');
+
+            var oMenu = document.getElementById('menu');
+            var aLi = oMenu.getElementsByTagName('li');
+
+            var timer = null;
+            var _this = null;
+
+            for(var i = 0; i < aLi.length; i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    clearTimeout(timer);
+                    for(var i = 0; i < aLi.length; i++){
+                        oUl[i + 1].style.display = 'none';
+                        aLi[i].className = '';
+                    }
+                    oUl[this.index + 1].style.display = 'block';
+                    aLi[this.index].className = 'hover';
+                };
+                aLi[i].onmouseout = function (){
+                    _this = this.index + 1;
+                    timer = setTimeout(function(){
+                        oUl[_this].style.display = 'none';
+                    },500)
+                }
+            }
+            for(var j = 1; j < oUl.length; j++){
+                mouse(oUl[j]);
+            }
+
+            function mouse(obj){
+                var aLi = obj.getElementsByTagName('li');
+                for(var i = 0; i < aLi.length; i++){
+                    aLi[i].index = i;
+                    aLi[i].onmouseover = function(){
+                        clearTimeout(timer);
+                        for(var i = 0; i < aLi.length; i++){
+                            aLi[i].className = 'none';
+                        }
+                        aLi[this.index].className = 'hover';
+                    };
+                    aLi[i].onmouseout = function(){
+                        timer = setTimeout(function(){
+                            obj.style.display = 'none';
+                        },500)
+                    }
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="time">
+        <ul id="menu">
+            <li class="hover"><a href="javascript:">首页</a></li>
+            <li><a href="javascript:">关于我们</a></li>
+            <li><a href="javascript:">作品</a></li>
+            <li><a href="javascript:">博客</a></li>
+        </ul>
+        <ul class="sub-menu">
+            <li><a href="javascript:">首页</a></li>
+            <li><a href="javascript:">关于我们</a></li>
+            <li><a href="javascript:">作品</a></li>
+            <li><a href="javascript:">博客</a></li>
+        </ul>
+        <ul class="sub-menu">
+            <li><a href="javascript:">电话</a></li>
+            <li><a href="javascript:">地图</a></li>
+            <li><a href="javascript:">邮件</a></li>
+            <li><a href="javascript:">微博</a></li>
+        </ul>
+        <ul class="sub-menu">
+            <li><a href="javascript:">Script</a></li>
+            <li><a href="javascript:">Html</a></li>
+            <li><a href="javascript:">Style</a></li>
+            <li><a href="javascript:">PHP</a></li>
+        </ul>
+        <ul class="sub-menu">
+            <li><a href="javascript:">新浪</a></li>
+            <li><a href="javascript:">网易</a></li>
+            <li><a href="javascript:">搜狐</a></li>
+            <li><a href="javascript:">百度</a></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>自动生成一个V</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        ul{ float: left; margin: 10px auto 0; position: relative; left: 25%; }
+        li { position: absolute; width: 30px; height: 30px; line-height: 30px; text-align: center; display: inline-block; color: #ffffff; background-color:red;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementsByTagName('ul')[0];
+            var leg = 9;
+
+            for(var i = 0; i < leg; i++){
+
+                if(i < leg / 2){
+                    oUl.innerHTML += '<li style="top: '+ i  *30 +'px; left: '+ i % leg * 30 +'px">' + i + '</li>';
+                }else{
+                    oUl.innerHTML += '<li style="top: '+ ( leg - 1 - i)  *30 +'px; left: '+ i % leg * 30 +'px">' + i + '</li>';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul></ul>
+</body>
+</html>

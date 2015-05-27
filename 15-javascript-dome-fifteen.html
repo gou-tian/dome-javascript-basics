@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>百度文库评分</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        li { list-style: none;}
+        #score,#score1 { width: 240px; height: 30px; margin: 30px auto 0; border: 1px solid #ccc;}
+        #score p,#score1 p { height: 30px; line-height: 30px; float: left;}
+        #score li,#score1 li { width: 18px; height: 30px; line-height: 30px; background:url("pic/big-stars.png")no-repeat -18px 5px; float: left; margin: 0 2px; text-align: center;}
+        #score .hover ,#score1 .hover { width: 18px; background:url("pic/big-stars.png")no-repeat 1px 5px; }
+        #score span,#score1 span { height: 30px; line-height: 30px;padding-left: 10px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oScore = document.getElementById('score');
+            var oScore1 = document.getElementById('score1');
+
+            score(oScore);
+            score(oScore1);
+
+            function score(obj){
+                var aLi = obj.getElementsByTagName('li');
+                var oSp = obj.getElementsByTagName('span')[0];
+                var arr = ['极差','差','好','推荐','力推'];
+                for(var i = 0; i < aLi.length; i++){
+                    aLi[i].index = i;
+                    aLi[i].onmouseover = function(){
+                        for (var i = 0; i < aLi.length; i++) {
+                            if(i <= this.index){
+                                aLi[i].className = 'hover';
+                                oSp.innerHTML = arr[this.index % aLi.length];
+                            }else{
+                                aLi[i].className = '';
+                                oSp.innerHTML = arr[this.index % aLi.length];
+                            }
+                            aLi[i].onmousedown = function(){
+                                alert(this.index + 1 + ' 分 ' + oSp.innerHTML );
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="score">
+        <p>请评分：</p>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span></span>
+    </div>
+    <div id="score1">
+        <p>请评分：</p>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <span></span>
+    </div>
+</body>
+</html>
