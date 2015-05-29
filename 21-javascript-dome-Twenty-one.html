@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>作业1-点击往下掉，再点击，再飘回来……一直循环</title>
+</head>
+<style>
+    div {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: red;
+    }
+</style>
+<script src="js/gtmove.js"></script>
+<script>
+    window.onload = function (){
+        var str = '';
+        var num = -1;
+        var oBody = document.body;
+        var timer = null;
+        var oDiv = document.getElementsByTagName('div');
+        var onOff = true;
+        for(var j = 0; j < 20; j++){
+            str += '<div style="left:'+ (10 + j * 60) + 'px' +';">' + '</div>';
+        }
+        oBody.innerHTML = str;
+
+        document.onclick = function(){
+            clearInterval(timer);
+            if(num < oDiv.length){
+                timer = setInterval(function(){
+                    num++;
+                    if(num < oDiv.length){
+                        gtMove(oDiv[num],'top',9,400);
+                        if(onOff == true){ return false}
+                    }else{
+                        clearInterval(timer);
+                        onOff = false;
+                    }
+                },200);
+                console.log(onOff)
+            }else{
+                timer = setInterval(function(){
+                    num--;
+                    if(num > -1){
+                        gtMove(oDiv[num],'top',9,0);
+                        if(onOff == false){ return false}
+                    }else{
+                        clearInterval(timer);
+                        onOff = true;
+                    }
+                },200);
+                console.log(onOff)
+            }
+        }
+    }
+</script>
+<body>
+
+</body>
+</html>
