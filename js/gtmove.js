@@ -4,14 +4,15 @@
 //运动函数
 function gtMove(obj,attr,num,target){
     //设定参数 obj(元素),attr(属性名称),num(速度计算值),target(目标值)
-    //定时器管理：清楚定时器。obj.timer为元素(obj)下的一个属性名为timer的属性。从而避免多值运动时发生冲突。
-    clearInterval(obj.timer);
+
     //判断速度标值：如果速度小于目标值则速度为正数，否则速度为负数。
-    if(num < target){
+    if(parseInt(gtStyle(obj,attr)) < target){
         num = +num;
     }else{
         num = -num;
     }
+    //定时器管理：清楚定时器。obj.timer为元素(obj)下的一个属性名为timer的属性。从而避免多值运动时发生冲突。
+    clearInterval(obj.timer);
     //定时器管理：开启定时器，并以每30毫秒一次执行定时器内的内容。
     obj.timer = setInterval(function(){
         //创建一个变量，计算速度。并用parseInt取整。去掉元素属性值的单位，获取数字以方便后面计算。
