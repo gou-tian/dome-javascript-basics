@@ -38,4 +38,5 @@ function gtStyle(obj,attr){
     * 2、getComputedStyle FF等标准浏览器兼容处理
     * */
     return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+        /*obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];*/
 }

@@ -18,7 +18,7 @@
 <script>
     window.onload = function (){
         var str = '';
-        var num = -1;
+        var num = 0;
         var oBody = document.body;
         var timer = null;
         var oDiv = document.getElementsByTagName('div');
@@ -28,32 +28,38 @@
         }
         oBody.innerHTML = str;
 
-        document.onclick = function(){
+        document.onclick = function() {
+            if(!onOff){
+                return console.log(onOff +' : 阻止');
+            }
             clearInterval(timer);
-            if(num < oDiv.length){
+            if(num < oDiv.length && num != oDiv.length){
+                console.log(onOff +' : 开始' + ' ' + num);
+                onOff = !onOff;
                 timer = setInterval(function(){
+                    gtMove(oDiv[num],'top',9,400);
                     num++;
-                    if(num < oDiv.length){
-                        gtMove(oDiv[num],'top',9,400);
-                        if(onOff == true){ return false}
-                    }else{
+                    if(num === oDiv.length){
                         clearInterval(timer);
-                        onOff = false;
+                        onOff = !onOff;
+                        console.log(onOff +' : 完成' + ' ' + num);
                     }
-                },200);
-                console.log(onOff)
-            }else{
+                },100)
+            }else if(num != 0 && onOff){
+                console.log(onOff +' : 开始' + ' ' + num);
+                onOff = !onOff;
                 timer = setInterval(function(){
                     num--;
-                    if(num > -1){
-                        gtMove(oDiv[num],'top',9,0);
-                        if(onOff == false){ return false}
-                    }else{
+                    gtMove(oDiv[num],'top',9,0);
+
+                    if(num === 0){
                         clearInterval(timer);
-                        onOff = true;
+                        onOff = !onOff;
+                        console.log(onOff +' : 完成' + ' ' + num);
                     }
-                },200);
-                console.log(onOff)
+                },100)
+            }else{
+                num = 0;
             }
         }
     }
