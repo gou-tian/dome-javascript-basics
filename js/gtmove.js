@@ -2,8 +2,8 @@
  * Created by gousky on 2015/5/28.
  */
 //运动函数
-function gtMove(obj,attr,num,target){
-    //设定参数 obj(元素),attr(属性名称),num(速度计算值),target(目标值)
+function gtMove(obj,attr,num,target,fn){
+    //设定参数 obj(元素),attr(属性名称),num(速度计算值),target(目标值),fn(回调函数)
 
     //判断速度标值：如果速度小于目标值则速度为正数，否则速度为负数。
     if(parseInt(gtStyle(obj,attr)) < target){
@@ -25,9 +25,42 @@ function gtMove(obj,attr,num,target){
         obj.style[attr] = speed + 'px';
         //定时器管理：如果速度值等于目标值时关闭定时器
         if(speed == target){
-            clearInterval(obj.timer)
+            clearInterval(obj.timer);
+            fn && fn();
         }
     },30)
+}
+//抖动函数
+function gtShake(obj,attr,fn){
+    //判断定时器是否开启，如开启阻止默认事件
+    if(obj.timer){
+        return;
+    }
+    //计算元素属性值
+    var pos = parseInt(gtStyle(obj,attr));
+    //声明一个空数组
+    var arrMar = [];
+    var num = 0;
+    //计算抖动幅度，并添加到数组
+    for(var i = 20; i > 0; i-=2){
+        arrMar.push(i,-i);
+    }
+    //给数组添加结束值
+    arrMar.push(0);
+    //清楚定时器
+    clearInterval(obj.timer);
+    //开启定时器
+    obj.timer = setInterval(function(){
+        obj.style[attr] = pos + arrMar[num] + 'px';
+        num++;
+        if ( num == arrMar.length ) {
+            clearInterval( obj.timer );
+            //判断是否有回调函数
+            fn && fn();
+            //清除阻止默认事件
+            obj.timer = false;
+        }
+    },40)
 }
 //获取元素属性值并做浏览器兼容处理
 function gtStyle(obj,attr){
@@ -38,5 +71,4 @@ function gtStyle(obj,attr){
     * 2、getComputedStyle FF等标准浏览器兼容处理
     * */
     return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
-        /*obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];*/
 }

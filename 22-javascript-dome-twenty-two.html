@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>修复抖动</title>
+    <style>
+        img {
+            position: absolute;
+            top: 50px;
+            left: 500px;
+            width: 300px;
+        }
+    </style>
+    <script src="js/gtmove.js"></script>
+    <script>
+        window.onload = function(){
+            var oImg = document.getElementsByTagName('img');
+
+            for(var i = 0; i < oImg.length; i++){
+                oImg[i].style.left = i * 320 + 'px';
+                oImg[i].onmouseover = function(){
+                    gtShake(this,'top');
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <img src="pic/10-4.jpg" alt="" />
+    <img src="pic/10-5.jpg" alt="" />
+    <img src="pic/10-6.jpg" alt="" />
+    <img src="pic/10-7.jpg" alt="" />
+</body>
+</html>
