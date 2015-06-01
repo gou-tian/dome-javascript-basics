@@ -6,17 +6,13 @@ function gtMove(obj,attr,num,target,fn){
     //设定参数 obj(元素),attr(属性名称),num(速度计算值),target(目标值),fn(回调函数)
 
     //判断速度标值：如果速度小于目标值则速度为正数，否则速度为负数。
-    if(parseInt(gtStyle(obj,attr)) < target){
-        num = +num;
-    }else{
-        num = -num;
-    }
+    num = parseInt(gtStyle(obj,attr)) < target ? num : -num;
     //定时器管理：清楚定时器。obj.timer为元素(obj)下的一个属性名为timer的属性。从而避免多值运动时发生冲突。
     clearInterval(obj.timer);
     //定时器管理：开启定时器，并以每30毫秒一次执行定时器内的内容。
     obj.timer = setInterval(function(){
         //创建一个变量，计算速度。并用parseInt取整。去掉元素属性值的单位，获取数字以方便后面计算。
-        var speed = num + parseInt(gtStyle(obj,attr));
+        var speed = parseInt(gtStyle(obj,attr)) + num;
         //判断速度值是否超过目标值。如果超过，速度值就等于目标值。并且在赋值之前拉回。可以防止视觉上的卡顿。
         if(speed > target && num > 0 || speed < target && num < 0){
             speed = target;
@@ -62,6 +58,31 @@ function gtShake(obj,attr,fn){
         }
     },40)
 }
+//透明度函数
+function gtAlpha(obj,num,tar,fn){
+    num = gtStyle(obj,'opacity') * 100 < tar ? num : -num;
+    //定时器管理：关闭定时器；
+    clearInterval(obj.timer);
+    //定时器管理：开启定时器；
+    obj.timer = setInterval(function(){
+        //计算速度值
+        var speed = parseInt(gtStyle(obj,'opacity')) * 100 + num;
+        //判断速度是否大于目标值。如果大于在则速度等于目标。把大于的数值在赋值前校正。
+        if(speed < tar && num > 0 || speed < tar && num < 0){
+            speed = tar;
+        }
+        //如果速度与目标相等关闭定时器；
+        if(speed === tar){
+            clearInterval(obj.timer);
+            //判断是否有回调函数
+            fn && fn();
+        }
+        //给对象赋值。
+        obj.style.opacity = speed / 100;
+        obj.style.filter = "alpha(opacity: " + speed + ")";
+    },30)
+}
+
 //获取元素属性值并做浏览器兼容处理
 function gtStyle(obj,attr){
     /*
