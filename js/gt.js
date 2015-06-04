@@ -1,5 +1,7 @@
 /**
  * Created by gousky on 2015/5/28.
+ *
+ *
  */
 //运动函数
 function gtMove(obj,attr,num,target,fn){
@@ -26,12 +28,32 @@ function gtMove(obj,attr,num,target,fn){
         }
     },30)
 }
+//运动函数-透明度运动
+function gtAlpha(obj,num,tar,fn){
+    //计算num值。*100使opacity的数值由小数转换成整数。然后判断num数值如小于目标值为正数，大于为负数。
+    num = parseInt(gtStyle(obj,'opacity')) * 100 < tar ? num : -num;
+    clearInterval(obj.timer);
+    obj.timer = setInterval(function(){
+        //计算速度值
+        var speed = parseInt(gtStyle(obj,'opacity')*100) + num;
+        //如果速度值大于或是小于目标值。速度值则等于目标值。
+        if(speed > tar && num > 0 || speed < tar && num < 0){
+            speed = tar;
+        }
+        //元素赋值
+        obj.style.opacity = speed / 100;
+        obj.style.filter = 'alpha(opacity='+ speed +')';
+        //关闭定时器条件，在关闭以后判断是否有回调函数。有则执行1，无则忽略。
+        if(speed === tar){
+            clearInterval(obj.timer);
+            fn && fn();
+        }
+    },30)
+}
 //抖动函数
 function gtShake(obj,attr,fn){
     //判断定时器是否开启，如开启阻止默认事件
-    if(obj.timer){
-        return;
-    }
+    if(obj.timer){ return; }
     //计算元素属性值
     var pos = parseInt(gtStyle(obj,attr));
     //声明一个空数组
