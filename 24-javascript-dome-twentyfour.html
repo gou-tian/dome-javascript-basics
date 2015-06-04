@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>图片自动切换</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        li { list-style: none;}
+        a { text-decoration: none;}
+        #dome24 {
+            position: relative;
+            left: 300px;
+            width: 500px;
+            height: 300px;
+            margin: 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #dc143c;
+        }
+        #J-img {
+            position: absolute;
+            left: 0;
+            width: 2500px;
+            height: 300px;
+        }
+        #J-img img {
+            float: left;
+        }
+        #J-txt {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 2500px;
+            height: 80px;
+        }
+        #J-txt div {
+            position: absolute;
+            bottom: -80px;
+            width: 500px;
+            height: 80px;
+            background-color: rgba(192,192,192,0.6);
+        }
+        #J-txt h3 {
+            font-size: 18px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #J-txt p {
+            font-size: 16px;
+            line-height: 30px;
+            text-align: left;
+            text-indent: 2em;
+        }
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        window.onload = function(){
+            var dome24 = document.getElementById('dome24');
+            var oImg = document.getElementById('J-img');
+            var aIm = oImg.getElementsByTagName('img');
+            var oTxt = document.getElementById('J-txt');
+            var aTx = oTxt.getElementsByTagName('div');
+            var imWid = aIm[0].offsetWidth;
+            var num = 0;
+            var iNum = 0;
+            for(var j = 0; j < aTx.length; j++){
+                aTx[j].style.left = j * 500 + 'px';
+            }
+            //console.log(oImg.offsetWidth);
+            setInterval(function(){
+                gtMove(aTx[iNum],'bottom',3,0,function(){
+                    setInterval(function(){
+                        gtMove(aTx[iNum],'bottom',3,-80,function(){
+                            gtMove(oImg,'left',13,-num);
+                            gtMove(oTxt,'left',13,-num);
+                        })
+                    },3000);
+                });
+                iNum++;
+                /*gtMove(oImg,'left',13,-num,function(){
+                 setTimeout(function(){
+                 gtMove(aTx[iNum],'bottom',3,-80,function(){
+                 iNum++;
+                 })
+                 },850);
+                 });
+                 gtMove(oTxt,'left',13,-num,function(){
+                 gtMove(aTx[iNum],'bottom',9,-80,function(){
+                 gtMove(aTx[iNum],'bottom',3,0);
+                 })
+                 });*/
+                num+=imWid;
+                if(num > oImg.offsetWidth - imWid){
+                    num = 0;
+                    iNum = 0;
+                    console.log(iNum,' ' + num);
+                }
+            },5000);
+        }
+    </script>
+</head>
+<body>
+<div id="dome24">
+    <div id="J-img">
+        <img src="pic/06-01.jpg" alt="" />
+        <img src="pic/06-02.jpg" alt="" />
+        <img src="pic/06-03.jpg" alt="" />
+        <img src="pic/06-04.jpg" alt="" />
+        <img src="pic/06-05.jpg" alt="" />
+    </div>
+    <div id="J-txt">
+        <div>
+            <h3>images 1</h3>
+            <p>The is images.Width is 500px,Height is 300.</p>
+        </div>
+        <div>
+            <h3>images 2</h3>
+            <p>The is images.Width is 500px,Height is 300.</p>
+        </div>
+        <div>
+            <h3>images 3</h3>
+            <p>The is images.Width is 500px,Height is 300.</p>
+        </div>
+        <div>
+            <h3>images 4</h3>
+            <p>The is images.Width is 500px,Height is 300.</p>
+        </div>
+        <div>
+            <h3>images 5</h3>
+            <p>The is images.Width is 500px,Height is 300.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
