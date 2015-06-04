@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>时间扩展版</title>
+    <style>
+        #dome25 {
+            position: relative;
+            width: 985px;
+            height: 176px;
+            margin: 20px auto 0;
+        }
+        #dome25 img {
+            position: relative;
+            float: left;
+        }
+    </style>
+</head>
+<script src="js/gt.js"></script>
+<script>
+    window.onload = function(){
+        var oDom = document.getElementById('dome25');
+        var aImg = oDom.getElementsByTagName('img');
+
+        setInterval(function(){
+            console.log(aImg[0]);
+            gtMove(aImg[0],'top',9,-176)
+        },1000)
+    }
+</script>
+<body>
+    <div id="dome25">
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/colon.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/colon.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+    </div>
+</body>
+</html>
