@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>倒计时抢购商品</title>
+    <style>
+        * { margin: 0; padding: 0;}
+        html { font-size: 10px;}
+        li { list-style: none;}
+        input { outline: none;}
+        img { border: none 0;}
+        #dome26 {
+            position: relative;
+            width: 770px;
+            margin: 10px auto 0;
+            zoom: 1;
+        }
+        .ware {
+            position: relative;
+            width: 770px;
+            height: 384px;
+            zoom: 1;
+        }
+        .ware:after,#dome26:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .ware h3 {
+            height: 30px;
+            line-height: 30px;
+            font-size: 2em;
+            background-color: #cfcfcf;
+        }
+        .ware ul {
+            position: relative;
+            top: 10px;
+        }
+        .ware li {
+            position: relative;
+            width: 190px;
+            height: 340px;
+            overflow: hidden;
+            float: left;
+            border: 1px solid green;
+        }
+        .ware li div {
+            position: absolute;
+            top: 0;
+            opacity: 1;
+            filter: alpha(opacity:100);
+        }
+        .ware input {
+            border: 1px solid #cfcfcf;
+        }
+        .ware .txt,.ware .but{
+            float: left;
+        }
+        .ware .txt { width: 140px; height: 26px; border-right: none; }
+        .ware .but { width: 49px; height: 28px; border-left: none;}
+        .ware p,.ware span,.ware em {
+            width: 200px;
+            height: 26px;
+            line-height: 26px;
+            float: left;
+            font-size: 14px;
+        }
+        .ware p ,.ware em{
+            text-align: center;
+        }
+        .ware img {
+            width: 190px;
+            height: 230px;
+            text-align: center;
+        }
+        .ware span {
+            text-indent: 1em;
+            text-align: left;
+        }
+        .ware em {
+            font-style: normal;
+        }
+        .ware-list {
+            position: relative;
+            top: 5px;
+            width: 770px;
+        }
+        .wrap {
+            height: 30px;
+            background-color: #cfcfcf;
+        }
+        .wrap p {
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            padding: 0 100px;
+            font-size: 14px;
+        }
+        .list {
+            margin: 5px 0;
+        }
+        .list li {
+            width: 770px;
+            height: 100px;
+            margin: 5px 0;
+            line-height: 100px;
+            display: none;
+            background-color: #cfcfcf;
+        }
+        .list span,.list strong {
+            height: 30px;
+            line-height: 30px;
+            font-size: 2em;
+            margin-left: 50px;
+        }
+        .list strong {
+            height: 30px;
+            line-height: 30px;
+            font-size: 2em;
+            margin-left: 150px;
+        }
+        .list img {
+            width: 190px;
+            height: 80px;
+            line-height: 80px;
+            float: right;
+            vertical-align: middle;
+            text-align: center;
+            margin: 10px 50px 0 0;
+        }
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        function fnTwo(n){
+            return n < 10 ? '0' + n : '' + n;
+        }
+        window.onload = function(){
+            var ware = document.getElementById('ware');
+            var wLi = ware.getElementsByTagName('li');
+            var wList  = document.getElementById('list');
+            var wlLi = wList.getElementsByTagName('li');
+            var str = '';
+
+            for(var i = 0; i < wLi.length; i++){
+                wLi[i].index = i;
+                fnElem(wLi[i],i);
+                console.log(wLi[i],i)
+            }
+
+
+            function fnElem(elem,num){
+                var wDiv = elem.getElementsByTagName('div')[0];
+                var wInp = wDiv.getElementsByTagName('input');
+                var wP = wDiv.getElementsByTagName('p')[0];
+                wInp[1].onclick = function(){
+                    var timer = setInterval(function(){
+                        var oldTime = new Date();
+                        var newTime = new Date(wInp[0].value);
+                        var overTime = Math.floor((newTime - oldTime) / 1000);
+                        if(overTime >= 0){
+                            str = fnTwo(Math.floor(overTime/86400))+'天'+fnTwo(Math.floor(overTime%86400/3600))+'时'+fnTwo(Math.floor(overTime%86400%3600/60))+'分'+fnTwo(overTime%60)+'秒';
+                            wP.innerHTML = str;
+                        }else{
+                            clearInterval(  timer);
+                            return gtShake(wDiv,'width',function(){
+                                gtMove(wDiv,'top',13,340,function(){
+                                    wlLi[num].style.display = 'list-item';
+                                });
+                            })
+                        }
+                    },1000)
+                }
+            }
+
+        };
+
+    </script>
+</head>
+<body>
+    <div id="dome26">
+        <div class="ware" id="ware">
+            <h3>商品抢购</h3>
+            <ul>
+                <li>
+                    <div>
+                        <label>
+                            <input type="text" value="June 6,2015 22:00:00" class="txt">
+                            <input type="button" value="确定" class="but">
+                        </label>
+                        <p>剩余0天0小时0分0秒</p>
+                        <img src="pic/150606-01.jpg" alt=""  />
+                        <span>商品说明和介绍</span>
+                        <em>抢购价:<strong>599.00</strong></em>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <label>
+                            <input type="text" value="June 6,2015 22:00:00" class="txt">
+                            <input type="button" value="确定" class="but">
+                        </label>
+                        <p>剩余0天0小时0分0秒</p>
+                        <img src="pic/150606-01.jpg" alt=""  />
+                        <span>商品说明和介绍</span>
+                        <em>抢购价:<strong>599.00</strong></em>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <label>
+                            <input type="text" value="June 6,2015 22:00:00" class="txt">
+                            <input type="button" value="确定" class="but">
+                        </label>
+                        <p>剩余0天0小时0分0秒</p>
+                        <img src="pic/150606-01.jpg" alt=""  />
+                        <span>商品说明和介绍</span>
+                        <em>抢购价:<strong>599.00</strong></em>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <label>
+                            <input type="text" value="June 6,2015 22:00:00" class="txt">
+                            <input type="button" value="确定" class="but">
+                        </label>
+                        <p>剩余0天0小时0分0秒</p>
+                        <img src="pic/150606-01.jpg" alt=""  />
+                        <span>商品说明和介绍</span>
+                        <em>抢购价:<strong>599.00</strong></em>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ware-list">
+            <div class="wrap">
+                <p>商品名称</p>
+                <p>商品价格</p>
+            </div>
+            <div class="list" id="list">
+                <ul>
+                    <li>
+                        <span>商品说明和介绍</span>
+                        <strong>599.00</strong>
+                        <img src="pic/150606-01.jpg" alt />
+                    </li>
+                    <li>
+                        <span>商品说明和介绍</span>
+                        <strong>599.00</strong>
+                        <img src="pic/150606-01.jpg" alt />
+                    </li>
+                    <li>
+                        <span>商品说明和介绍</span>
+                        <strong>599.00</strong>
+                        <img src="pic/150606-01.jpg" alt />
+                    </li>
+                    <li>
+                        <span>商品说明和介绍</span>
+                        <strong>599.00</strong>
+                        <img src="pic/150606-01.jpg" alt />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
