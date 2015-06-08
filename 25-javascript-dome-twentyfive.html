@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>网页时钟</title>
+    <style>
+        #dome25 {
+            width: 980px;
+            height: 176px;
+            position: relative;
+            margin: 50px auto 0;
+        }
+        #dome25 img {
+            position: absolute;
+            top: 0;
+        }
+        #dome25 p {
+            position: absolute;
+            width: 123px;
+            height: 173px;
+        }
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome25');
+            var aImg = oDom.getElementsByTagName('img');
+            var aPmg = document.getElementsByTagName('p');
+            setInterval(fnTime,1000);
+            for(var i = 0; i < aPmg.length; i++){
+                aPmg[i].style.left = i * 224 + 'px';
+            }
+            fnTime();
+            function fnTime(){
+                var gtTime = new Date();
+                var iHours = gtTime.getHours();
+                var iMinutes = gtTime.getMinutes();
+                var iMonth = gtTime.getSeconds();
+                var str = fnTwo(iHours)+fnTwo(iMinutes)+fnTwo(iMonth);
+                var sImg = '';
+                console.log(str);
+                for(var i = 0; i < 6; i++){
+                    aImg[i].style.left = i * 122 + 'px';
+                    aImg[i].src = 'pic/num/'+ str.charAt(i) +'.JPG';
+                }
+            }
+            console.log(aPmg);
+            function fnTwo(num){
+                return num < 10 ? '0' + num : '' + num;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dome25">
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <p></p>
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+        <p></p>
+        <img src="pic/num/0.JPG" alt="" />
+        <img src="pic/num/0.JPG" alt="" />
+    </div>
+</body>
+</html>
