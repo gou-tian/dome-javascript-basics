@@ -1,66 +1,187 @@
 <!DOCTYPE html>
 <html>
-<head lang="zh-CN">
+<head lang="zh-cn">
     <meta charset="UTF-8">
-    <title>网页时钟</title>
+    <title>时钟</title>
     <style>
+        * { margin: 0; padding: 0;}
+        li { list-style: none;}
         #dome25 {
-            width: 980px;
-            height: 176px;
             position: relative;
-            margin: 50px auto 0;
+            width: 992px;
+            height: 173px;
+            overflow: hidden;
+            margin: 20px auto 0;
+        }
+        #dome25 li {
+            position: relative;
+            left: 0;
+            width: 122px;
+            height: 173px;
+            float: left;
+        }
+        #dome25 div {
+            position: absolute;
+            top: 0;
         }
         #dome25 img {
             position: absolute;
             top: 0;
-        }
-        #dome25 p {
-            position: absolute;
-            width: 123px;
-            height: 173px;
+            left: 0;
         }
     </style>
-    <script src="js/gt.js"></script>
-    <script>
-        window.onload = function(){
-            var oDom = document.getElementById('dome25');
-            var aImg = oDom.getElementsByTagName('img');
-            var aPmg = document.getElementsByTagName('p');
-            setInterval(fnTime,1000);
-            for(var i = 0; i < aPmg.length; i++){
-                aPmg[i].style.left = i * 224 + 'px';
-            }
-            fnTime();
-            function fnTime(){
-                var gtTime = new Date();
-                var iHours = gtTime.getHours();
-                var iMinutes = gtTime.getMinutes();
-                var iMonth = gtTime.getSeconds();
-                var str = fnTwo(iHours)+fnTwo(iMinutes)+fnTwo(iMonth);
-                var sImg = '';
-                console.log(str);
-                for(var i = 0; i < 6; i++){
-                    aImg[i].style.left = i * 122 + 'px';
-                    aImg[i].src = 'pic/num/'+ str.charAt(i) +'.JPG';
+</head>
+<script src="js/gt.js"></script>
+<script>
+    window.onload = function(){
+        var oDom = document.getElementById('dome25');
+        var aLi = oDom.getElementsByTagName('li');
+
+        /*
+        //无动画版
+        var timer = null;
+        setInterval(fnTime,1000);
+        fnTime();
+        function fnTime(){
+            var iTime = new Date();
+            var iHours = iTime.getHours();
+            var iMinutes = iTime.getMinutes();
+            var iSeconds = iTime.getSeconds();
+            var str = fnTwo(iHours) + ':' + fnTwo(iMinutes) + ':' + fnTwo(iSeconds);
+
+            for(var i = 0; i < aLi.length; i++){
+                aIm[i].index = i;
+                if(str.charAt(i) == ':'){
+                    aIm[i].src = 'pic/num/colon.jpg';
+                    clearInterval(timer);
+                    timer = setInterval(function(){
+                        aIm[2].src = aIm[5].src = 'pic/num/colon2.JPG';
+                    },500)
+                }else{
+                    aIm[i].src = 'pic/num/'+ str.charAt(i) +'.JPG';
+                    console.log(aIm[i].src)
                 }
             }
-            console.log(aPmg);
-            function fnTwo(num){
-                return num < 10 ? '0' + num : '' + num;
+        }
+        */
+
+        //动画版
+        fnTime();
+        setInterval(fnTime,1000);
+        function fnTime(){
+            var iTime = new Date();
+            var iHours = iTime.getHours();
+            var iMinutes = iTime.getMinutes();
+            var iSeconds = iTime.getSeconds();
+            var str = fnTwo(iHours) + ':' + fnTwo(iMinutes) + ':' + fnTwo(iSeconds);
+            for(var i = 0; i < aLi.length; i++){
+                fnElem(aLi[i],i)
+            }
+            function fnElem(elem,num){
+                //var wrap = elem.getElementsByTagName('div')[0];
+                var aImg = elem.getElementsByTagName('img');
+                if(str.charAt(num) == ':'){
+                    aImg[0].src = 'pic/num/colon.jpg';
+                    setTimeout(function(){
+                        aImg[0].src = 'pic/num/colon2.JPG';
+                    },500)
+                }else{
+                    aImg[1].src = 'pic/num/'+ str.charAt(num) +'.JPG';
+                    if(aImg[0].src != aImg[1].src){
+                        gtMove(aImg[1],'top',13,-70,function(){
+                            aImg[0].src = aImg[1].src;
+                            aImg[1].style.top = 0;
+                        })
+                    }
+                }
             }
         }
-    </script>
-</head>
+
+    };
+    function fnTwo(n){
+        return n < 10 ? '0'+n : ''+n;
+    }
+</script>
 <body>
     <div id="dome25">
-        <img src="pic/num/0.JPG" alt="" />
-        <img src="pic/num/0.JPG" alt="" />
-        <p></p>
-        <img src="pic/num/0.JPG" alt="" />
-        <img src="pic/num/0.JPG" alt="" />
-        <p></p>
-        <img src="pic/num/0.JPG" alt="" />
-        <img src="pic/num/0.JPG" alt="" />
+        <!--
+        //无动画版
+        <ul>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+            <li>
+                <img src="" alt="" />
+            </li>
+        </ul>
+        -->
+        <!-- 动画版 -->
+        <ul>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="" alt="" />
+                    <img src="" alt="" />
+                </div>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
