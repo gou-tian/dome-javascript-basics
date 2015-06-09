@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>字符串--查找、替换</title>
+    <style>
+        body,p,ul { margin: 0; padding: 0;}
+        li { list-style: none;}
+        input { outline: none;}
+        html { font-size: 10px;}
+        #dome27 {
+            position: relative;
+            width: 500px;
+            margin: 50px auto 0;
+            /*border: 1px solid #cfcfcf;*/
+        }
+        .seh-txt {
+            width: 400px;
+            padding: 10px;
+            border: 4px solid #cfcfcf;
+        }
+        .txt {
+            font-size: 1.4em;
+        }
+        .seh {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.6em;
+        }
+        .seh p {
+            height: 30px;
+            line-height: 30px;
+            padding: 0 8px;
+            border: 1px solid #cccccc;
+            cursor: pointer;
+        }
+        .seh ul {
+            display: none;
+        }
+        .seh li {
+            height: 28px;
+            line-height: 28px;
+            padding: 0 8px;
+            border: 1px solid #cccccc;
+            background-color: #f1f1f1;
+        }
+        .seh-con {
+            position: relative;
+            top: 2px;
+            width: 420px;
+            border: 4px solid #cccccc;
+            zoom: 1;
+            display: none;
+        }
+        .seh-con:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .seh-con p {
+            height: 30px;
+            line-height: 30px;
+            font-size: 1.6em;
+            float: left;
+            padding: 0 40px;
+            background-color: #999999;
+        }
+        .con {
+            position: relative;
+            top: 1px;
+            display: none;
+        }
+        .con label {
+            float: left;
+        }
+        .con input {
+            float: left;
+        }
+        .con input[type=text] {
+            height: 24px;
+            line-height: 24px;
+            text-indent: 1em;
+            font-size: 1.4em;
+        }
+        .con input[type=button] {
+            height: 30px;
+            line-height: 30px;
+        }
+        .hover {
+            background-color: #f1f1f1!important;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oTxt = document.getElementById('seh-txt');
+
+            var conTer = oTxt.getElementsByTagName('p')[0];
+            var menu = oTxt.getElementsByTagName('p')[1];
+            var suMenu = oTxt.getElementsByTagName('ul')[0];
+            var aLi = suMenu.getElementsByTagName('li');
+
+            var oSeh = document.getElementById('seh-con');
+
+            var sehP = oSeh.getElementsByTagName('p');
+            var sehDiv = oSeh.getElementsByTagName('div');
+
+            var timer = null;
+
+            menu.onmouseover = function () {
+                clearInterval(timer);
+                suMenu.style.display = 'block';
+            };
+            menu.onmouseout = mouseOut;
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].index = i;
+                aLi[i].onmouseover = function () {
+                    clearInterval(timer);
+                };
+                aLi[i].onmouseout = mouseOut;
+                aLi[i].onclick = function () {
+                    oSeh.style.display = 'block';
+                    for (var i = 0; i < sehP.length; i++) {
+                        sehP[i].className = '';
+                        sehDiv[i].style.display = 'none'
+                    }
+                    sehP[this.index].className = 'hover';
+                    sehDiv[this.index].style.display = 'block'
+                }
+            }
+            for (var j = 0; j < sehDiv.length; j++) {
+
+            }
+            fnInput();
+            function fnInput() {
+                var aInp = sehDiv[0].getElementsByTagName('input');
+                var aInp1 = sehDiv[1].getElementsByTagName('input');
+                aInp[1].onclick = function () {
+                    var inp = aInp[0].value;
+                    var str = conTer.innerHTML;
+                    var arr = str.split(inp);
+                    if (!str || inp == '') {
+                        return alert('内容不能为空');
+                    }
+                    conTer.innerHTML = arr.join('<span style="background-color: #ff0">' + inp + '</span>');
+                    aInp[0].value = '';
+                };
+                aInp1[2].onclick = function () {
+                    var inp = aInp1[0].value;
+                    var newInp = aInp1[1].value;
+                    var str = conTer.innerHTML;
+                    var arr = str.split(inp);
+                    if (!str) {
+                        return ;
+                    }
+                    if( inp == '' && newInp == ''){
+                        return alert('内容不能为空！');
+                    }else if(newInp == ''){
+                        if(confirm('确定要删除选中内容？')){
+                            return conTer.innerHTML = arr.join('');
+                        }else{
+                            return false;
+                        }
+                    }
+                        conTer.innerHTML = arr.join('<span style="background-color: #ff0">' + newInp + '</span>');
+                        aInp1[0].value = aInp1[1].value = '';
+                };
+            }
+            function mouseOut() {
+                timer = setInterval(function () {
+                    suMenu.style.display = 'none';
+                }, 500)
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dome27">
+        <div class="seh-txt" id="seh-txt">
+            <div class="txt">
+                <p>
+                    因此，网速慢与网费贵成为了热点，仿佛运营商一夜之间就成为了中国社会发展的瓶颈。
+                    <br />因此，网速慢与网费贵成为了热点，仿佛运营商一夜之间就成为了中国社会发展的瓶颈。
+                </p>
+            </div>
+            <div class="seh">
+                <p>菜单</p>
+                <ul>
+                    <li>查找</li>
+                    <li>替换</li>
+                </ul>
+            </div>
+        </div>
+        <div class="seh-con" id="seh-con">
+            <p class="hover">查找</p>
+            <p>替换</p>
+            <div class="con" style="display: block">
+                <label>
+                    <input type="text">
+                    <input type="button" value="查找">
+                </label>
+            </div>
+            <div class="con">
+                <label>
+                    <input type="text">
+                    <input type="text">
+                    <input type="button" value="替换">
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
