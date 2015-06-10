@@ -80,30 +80,6 @@ function gtShake(obj,attr,fn){
         }
     },40)
 }
-//透明度函数
-function gtAlpha(obj,num,tar,fn){
-    num = gtStyle(obj,'opacity') * 100 < tar ? num : -num;
-    //定时器管理：关闭定时器；
-    clearInterval(obj.timer);
-    //定时器管理：开启定时器；
-    obj.timer = setInterval(function(){
-        //计算速度值
-        var speed = parseInt(gtStyle(obj,'opacity')) * 100 + num;
-        //判断速度是否大于目标值。如果大于在则速度等于目标。把大于的数值在赋值前校正。
-        if(speed < tar && num > 0 || speed < tar && num < 0){
-            speed = tar;
-        }
-        //如果速度与目标相等关闭定时器；
-        if(speed === tar){
-            clearInterval(obj.timer);
-            //判断是否有回调函数
-            fn && fn();
-        }
-        //给对象赋值。
-        obj.style.opacity = speed / 100;
-        obj.style.filter = "alpha(opacity: " + speed + ")";
-    },30)
-}
 
 //获取元素属性值并做浏览器兼容处理
 function gtStyle(obj,attr){

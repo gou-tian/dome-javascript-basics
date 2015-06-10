@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>文字搬运工</title>
+    <style>
+        body,ul,p,textarea {
+            margin: 0;
+            padding: 0;
+        }
+        li { list-style: none;}
+        textarea { outline: none; float: left;}
+        #dome28 {
+            width: 720px;
+            border: 1px solid red;
+            margin: 0 auto;
+            padding: 10px;
+            zoom: 1;
+        }
+        #dome28:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .mark {
+            width: 100px;
+            float: left;
+            padding: 10px;
+            text-align: center;
+        }
+        .mark p,.mark ul { padding-top: 10px;}
+        .mark ul {
+            opacity: 0;
+            -ms-filter: alpha(opacity=0);
+            filter: alpha(opacity=0);
+        }
+        .mark li {
+            width: 8px;
+            height: 20px;
+            background-color: #ff9c00;
+            float: left;
+            margin: 0 2px;
+        }
+        .liMove { background-color: #ff1493!important;}
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome28');
+            var tArea = oDom.getElementsByTagName('textarea');
+            var oDiv = oDom.getElementsByTagName('div')[0];
+            var aInp = oDiv.getElementsByTagName('input')[0];
+            var aP = oDiv.getElementsByTagName('p')[0];
+            var oUL = oDiv.getElementsByTagName('ul')[0];
+            var aLi = oDiv.getElementsByTagName('li');
+            var onOff = true;
+            aInp.onclick = function(){
+                if(!onOff){
+                    return;
+                }
+                if(tArea[0].value === ''){
+                    return (
+                            alert('请在左边输入内容！')
+                    )
+                }
+                var str = tArea[0].value;
+                var arr = str.split('');
+                var timer = null;
+                var num = 0;
+                var iNow = 0;
+                var oldClass = null;
+                tArea[1].value = '';
+                gtAlpha(oUL,7,100);
+                oldClass = aLi[iNow];
+                timer = setInterval(function(){
+                    onOff = false;
+                    tArea[1].value += arr[num];
+                    tArea[0].value = tArea[0].value.substring(1);
+                    aP.innerHTML = num + '/' + (arr.length-1);
+                    if(iNow < aLi.length || iNow == 0){
+                        oldClass.className = '';
+                        oldClass = aLi[iNow];
+                        aLi[iNow].className = 'liMove';
+                        iNow++;
+                    }else{
+                        iNow = 0;
+                    }
+                    num++;
+                    if(num > arr.length-1){
+                        clearInterval(timer);
+                        gtAlpha(oUL,7,0);
+                        onOff = true;
+                    }
+                },50);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dome28">
+        <label>
+            <textarea cols="40" rows="15"></textarea>
+        </label>
+        <div class="mark">
+            <input type="button" value="把文字右移">
+            <p>0/0</p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <label>
+            <textarea cols="40" rows="15" readonly></textarea>
+        </label>
+    </div>
+</body>
+</html>
