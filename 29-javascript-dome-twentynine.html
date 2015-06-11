@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>数组-排序</title>
+    <style>
+        body,ul,p,h3 { margin: 0; padding: 0;}
+        li { list-style: none;}
+        img { border: none 0;}
+        #dome29 {
+            width: 600px;
+            margin: 10px auto 0;
+            border: 4px solid #cfcfcf;
+            zoom: 1;
+        }
+        #dome29:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #dome29 p {
+            width: 100px;
+            height: 30px;
+            margin: 5px;
+            line-height: 30px;
+            text-align: center;
+            float: left;
+            border: 1px solid #dc143c;
+            cursor: pointer;
+        }
+        #dome29 ul{
+            float: left;
+        }
+        #dome29 li {
+            width: 300px;
+            height: 230px;
+            float: left;
+        }
+        #dome29 h3 {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome29');
+            var oUl = oDom.getElementsByTagName('ul')[0];
+            var aLi = oDom.getElementsByTagName('li');
+            var aP = oDom.getElementsByTagName('p');
+            var arrL = [];
+            var arr = [];
+            var str = '';
+            var onOff = true;
+
+            for(var i = 0; i < aLi.length; i++){
+                arrL.push(aLi[i]);
+                arr.push(aLi[i]);
+            }
+            // 从大到小
+            aP[0].onclick = function(){
+                arrL.reverse();
+                str = '';
+                for(var i = 0; i < arrL.length; i++){
+                    str += '<li/>' + arrL[i].innerHTML;
+                }
+                aP[0].innerHTML = !onOff ? '从大到小' : '从小到大';
+                oUl.innerHTML = str;
+                onOff = !onOff;
+            };
+            // 随机排序
+            aP[1].onclick = function(){
+                arr.sort(function ( a, b ) {
+                    return Math.random() - 0.5;
+                });
+                str = '';
+                for(var i = 0; i < arr.length; i++){
+                    str += '<li/>' + arr[i].innerHTML;
+                }
+                oUl.innerHTML = str;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dome29">
+        <p>从大到小</p>
+        <p>随机排序</p>
+        <ul>
+            <li>
+                <img src="pic/10-1.jpg" alt />
+                <h3>images 1</h3>
+            </li>
+            <li>
+                <img src="pic/10-2.jpg" alt />
+                <h3>images 2</h3>
+            </li>
+            <li>
+                <img src="pic/10-3.jpg" alt />
+                <h3>images 3</h3>
+            </li>
+            <li>
+                <img src="pic/10-4.jpg" alt />
+                <h3>images 4</h3>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
