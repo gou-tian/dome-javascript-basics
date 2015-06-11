@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>数组-随机图片滚动</title>
+    <style>
+        body,ul,p,h3 { margin: 0; padding: 0;}
+        li { list-style: none;}
+        img { border: none 0;}
+        #dome30 {
+            width: 600px;
+            margin: 10px auto 0;
+            border: 4px solid #cfcfcf;
+            zoom: 1;
+        }
+        #dome30:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        #dome30 ul{
+            float: left;
+        }
+        #dome30 li {
+            width: 300px;
+            height: 200px;
+            float: left;
+            overflow: hidden;
+        }
+        #dome30 div {
+            position: relative;
+            top: 0;
+        }
+        #dome30 img {
+            position: relative;
+        }
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome30');
+            var aLi = oDom.getElementsByTagName('li');
+
+            for(var i = 0; i < aLi.length; i++){
+                fn(aLi[i])
+            }
+            function fn(obj){
+                var aDiv = obj.getElementsByTagName('div')[0];
+                var aImg = obj.getElementsByTagName('img');
+                console.log(aDiv,aImg);
+                setInterval(function(){
+                    gtMove(aDiv,'top',13,-203,function(){
+                        setTimeout(function(){
+                            aImg[0].style.top = 406 + 'px';
+                            gtMove(aDiv,'top',13,-406,function(){
+                                setTimeout(function(){
+                                    aDiv.style.top = 0;
+                                    aImg[0].style.top = 0;
+                                },500)
+                            })
+                        },500)
+                    })
+                },Math.round( Math.random()*1500 + 1500 ))
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="dome30">
+    <ul>
+        <li>
+            <div>
+                <img src="pic/10-1.jpg" alt />
+                <img src="pic/10-2.jpg" alt />
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="pic/10-3.jpg" alt />
+                <img src="pic/10-4.jpg" alt />
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="pic/10-5.jpg" alt />
+                <img src="pic/10-6.jpg" alt />
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="pic/10-7.jpg" alt />
+                <img src="pic/10-8.jpg" alt />
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
