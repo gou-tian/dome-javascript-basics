@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>数组-自定义字体形状</title>
+    <style>
+        #dome31 {
+            width: 304px;
+            margin: 10px auto 0;
+            border: 4px solid red;
+            zoom: 1;
+        }
+        #dome31:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        textarea ,select ,input {
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome31');
+            var oSel = document.getElementById('sel-bac');
+            var aTxt = oDom.getElementsByTagName('textarea');
+            //console.log(aTxt);
+            var oSele = oSel.getElementsByTagName('select')[0];
+            var aOpt = oSel.getElementsByTagName('option');
+            console.log(aOpt[1].value)
+        }
+    </script>
+</head>
+<body>
+    <div id="dome31">
+        <label>
+            <textarea cols="40" rows="10" readonly >sdkd</textarea>
+            <select name="background" id="sel-bac">
+                <option value="" selected>请选背景色</option>
+                <option value="1">红色</option>
+                <option value="2">绿色</option>
+                <option value="3">蓝色</option>
+            </select>
+            <textarea cols="40" rows="10"></textarea>
+            <input type="button" value="发送"/>
+        </label>
+    </div>
+</body>
+</html>
