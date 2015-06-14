@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>DOM-留言板</title>
+    <style>
+        body,textarea,ul,p { margin: 0; padding: 0;}
+        html { font-size: 62.5%}
+        li { list-style: none;}
+        img { border: none 0;}
+        textarea,input { outline: none;}
+        #dome32 {
+            width: 400px;
+            margin: 10px auto 0;
+            padding: 10px;
+            border: 1px solid #cfcfcf;
+            background-color: #333333;
+        }
+        .text {
+            position: relative;
+            height: 132px;
+            padding: 0 5px;
+            background-color: #ffffff;
+            border: 1px solid #cfcfcf;
+        }
+        .text textarea {
+            position: absolute;
+            top: 26px;
+            left: 3px;
+            width: 390px;
+            height: 70px;
+            resize: none;
+            font-size: 1.4em;
+            line-height: 18px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        .text textarea:hover {
+            border: 1px solid #b8860b;
+        }
+        .text p {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            font-style: italic;
+            font-size: 2.2em;
+            font-family: Constantia, Georgia,sans-serif;
+        }
+        .text .button {
+            position: absolute;
+            top: 100px;
+            right: 0;
+            line-height: 30px;
+        }
+        .text .button a {
+            position: absolute;
+            right: 3px;
+            display: inline-block;
+            padding: 0 10px;
+            width: 60px;
+            height: 30px;
+            font-size: 1.6em;
+            font-family: "微软雅黑", "Microsoft Yahei", Arial, "黑体", sans-serif;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid #ffc09f;
+            background-color: #ffc09f;
+        }
+        .show {
+            background-color: #ffffff;
+            border: 1px solid #cfcfcf;
+            position: relative;
+            top: 10px;
+            bottom: 0;
+            padding: 0 10px;
+            zoom: 1;
+        }
+        .show:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .show li {
+            line-height: 30px;
+        }
+    </style>
+    <script src="js/gt.js"></script>
+    <script>
+        window.onload = function(){
+            var oDom = document.getElementById('dome32');
+            var aDiv = oDom.getElementsByTagName('div');
+            //console.log(aDiv);
+            var oTxt = aDiv[0].getElementsByTagName('textarea')[0];
+            var aSpa = aDiv[0].getElementsByTagName('p')[0].getElementsByTagName('span')[0];
+            var oBut = aDiv[0].getElementsByTagName('a')[0];
+
+            var oUl = aDiv[2].getElementsByTagName('ul')[0];
+            var str = '';
+            var strArr = [];
+
+            setInterval(function(){
+                if(strArr.length < 140){
+                    str = oTxt.value;
+                    strArr = str.split('');
+                    aSpa.innerHTML = 140 - strArr.length;
+                }else{
+                    aSpa.innerHTML = '<span style="color: #CC0033;">' + 0 + '</span>';
+                }
+            },30);
+            oBut.onclick = function(){
+                switch (oTxt.value){
+                    case '':
+                        return alert('请输入内容');
+                        break;
+                    case 140:
+                        return;
+                }
+                var aLi = document.createElement('li');
+                aLi.innerHTML = oTxt.value;
+                if(oUl.children[0]){
+                    oUl.insertBefore(aLi,oUl.children[0]);
+                }else{
+                    oUl.appendChild(aLi);
+                }
+                oTxt.value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="dome32">
+        <div class="text">
+            <label>
+                <textarea></textarea>
+            </label>
+            <p>还可以输入<span>140</span>字</p>
+            <div class="button">
+                <a href="javascript:">发送</a>
+            </div>
+        </div>
+        <div class="show">
+            <ul>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
