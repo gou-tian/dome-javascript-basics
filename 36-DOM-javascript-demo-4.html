@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>元素重叠检测</title>
+    <style>
+        #demo36{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        #element {
+            width: 200px;
+            height: 200px;
+            margin: 12% auto 0;
+            background-color: royalblue;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取移动元素
+            var oDemo = document.getElementById('demo36');
+            //获取目标元素
+            var oElem = document.getElementById('element');
+
+            //鼠标在移动元素上按下触发事件
+            oDemo.onmousedown = function(ev){
+                //事件兼容处理
+                var ev = ev || event;
+                //鼠标当前水平(X)和垂直位置(Y)
+                //鼠标触发event事件是的坐标
+                var mouseX = ev.clientX - this.offsetLeft;
+                var mouseY = ev.clientY - this.offsetTop;
+                //兼容处理:IE低版本非标准浏览器
+                //获取全局捕获
+                if ( oDemo.setCapture ) {
+                    oDemo.setCapture();
+                }
+                //移动元素是防止鼠标移动过去超出元素自身，把鼠标移动事件交给文档对象
+                document.onmousemove = function(ev){
+                    //事件兼容处理
+                    var ev = ev || event;
+                    //鼠标当前水平和垂直位置
+                    //把鼠标水平和垂直位置赋值给移动元素
+                    oDemo.style.left = ev.clientX - mouseX + 'px';
+                    oDemo.style.top = ev.clientY -  mouseY + 'px';
+                    //目标元素四个边的值
+                    //目标元素右、下边值计算 Left+Width/Top+Height
+                    var eLeft = oElem.offsetLeft;
+                    var eTop = oElem.offsetTop;
+                    var eRight = oElem.offsetLeft + oElem.offsetWidth;
+                    var eBottmo = oElem.offsetTop + oElem.offsetHeight;
+
+                    //移动元素四个个边的值
+                    //移动元素右、下边值计算 Left+Width/Top+Height
+                    var dLeft = oDemo.offsetLeft;
+                    var dTop = oDemo.offsetTop;
+                    var dRight = oDemo.offsetLeft + oDemo.offsetWidth;
+                    var dBottom = oDemo.offsetTop  + oDemo.offsetHeight;
+
+                    //元素重叠检测
+                    if(dRight < eLeft || dBottom < eTop || dLeft > eRight || dTop > eBottmo){
+                       oElem.style.backgroundColor = 'royalblue';
+                    }else{
+                        oElem.style.backgroundColor = '#ccc';
+                    }
+                };
+                //鼠标抬起后清楚事件
+                document.onmouseup = function(){
+                    document.onmousemove = document.onmouseup = null;
+                    //释放全局捕获 releaseCapture();
+                    if ( oDemo.releaseCapture ) {
+                        oDemo.releaseCapture();
+                    }
+                };
+                //阻止默认事件
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="demo36"></div>
+    <div id="element"></div>
+</body>
+</html>

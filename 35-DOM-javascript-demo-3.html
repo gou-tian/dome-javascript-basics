@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>元素拖动</title>
+    <style>
+        #demo35{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取移动元素
+            var oElem = document.getElementById('demo35');
+            //鼠标在元素上按下
+            oElem.onmousedown = function(ev){
+                //事件兼容处理
+                var ev = ev || event;
+                //鼠标当前水平(X)和垂直位置(Y)
+                var mouseX = ev.clientX - this.offsetLeft;
+                var mouseY = ev.clientY - this.offsetTop;
+                //全局捕获
+                //兼容处理:IE低版本非标准浏览器
+                if ( oElem.setCapture ) {
+                    oElem.setCapture();
+                }
+                //移动元素的时候，为了防止鼠标移动过去超出元素自身，把事件在文档对象(doucment)上
+                document.onmousemove = function(ev){
+                    //事件兼容处理
+                    var ev = ev || event;
+                    //鼠标当前水平和垂直位置
+                    //把鼠标水平和垂直位置赋值给移动元素
+                    oElem.style.left = ev.clientX - mouseX + 'px';
+                    oElem.style.top = ev.clientY -  mouseY + 'px';
+                };
+                //鼠标抬起后清楚事件
+                document.onmouseup = function(){
+                    document.onmousemove = document.onmouseup = null;
+                    //释放全局捕获 releaseCapture();
+                    if ( oElem.releaseCapture ) {
+                        oElem.releaseCapture();
+                    }
+                };
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="demo35"></div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>元素拖拽限制范围</title>
+    <style>
+        #demo37 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background-color:red;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            //获取元素
+            var oElem = document.getElementById('demo37');
+            //触发鼠标事件
+            oElem.onmousedown = function(ev){
+                //event事件处理
+                var ev = ev || event;
+                //获取ev事件后的鼠标水平(X)和垂直(Y)坐标
+                var mouseX = ev.clientX - this.offsetLeft;
+                var mouseY = ev.clientY - this.offsetTop;
+                //兼容处理:IE低版本非标准浏览器
+                //获取全局捕获
+                if ( oElem.setCapture ) {
+                    oElem.setCapture();
+                }
+                //鼠标移动事件。防止鼠标快速移动时超出元素，所以把移动事件加的文档对象上
+                document.onmousemove = function(ev){
+                    //event事件处理
+                    var ev = ev || event;
+                    //限制元素拖拽范围
+                    var oElemW = ev.clientX - mouseX;
+                    var oElemH = ev.clientY - mouseY;
+                    //获取可视区宽高
+                    var L = document.documentElement.clientWidth;
+                    var T = document.documentElement.clientHeight;
+                    //限制左右
+                    if(oElemW > L - oElem.offsetWidth){
+                        oElemW = L - oElem.offsetWidth;
+                    }else if (oElemW < 0){
+                        oElemW = 0;
+                    }
+                    //限制上下
+                    if(oElemH > T - oElem.offsetHeight){
+                        oElemH = T - oElem.offsetHeight;
+                    }else if(oElemH < 0){
+                        oElemH = 0;
+                    }
+                    //把鼠标坐标值赋值给元素
+                    oElem.style.left = oElemW + 'px';
+                    oElem.style.top = oElemH + 'px';
+
+                };
+                //清除事件
+                document.onmouseup = function(){
+                    document.onmousemove = document.onmouseup = null;
+                    //释放全局捕获 releaseCapture();
+                    if ( oElem.releaseCapture ) {
+                        oElem.releaseCapture();
+                    }
+                };
+                //阻止默认事件
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="demo37"></div>
+</body>
+</html>

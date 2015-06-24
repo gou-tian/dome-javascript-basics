@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DOM焦点</title>
+    <script>
+        window.onload = function(){
+            var aInp = document.getElementsByTagName('input')[0];
+            aInp.value = '请输入需要的内容';
+            //获取焦点
+            aInp.onfocus = function(){
+                if(aInp.value == '请输入需要的内容'){
+                    aInp.value = '';
+                }
+            };
+            //失去焦点
+            aInp.onblur = function(){
+                if(aInp.value == ''){
+                    aInp.value = '请输入需要的内容';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <label>
+        <input type="text" />
+    </label>
+</body>
+</html>
