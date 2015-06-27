@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>运动函数封装</title>
+    <style>
+        #move {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: red;
+        }
+        #alpha {
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            width: 150px;
+            height: 150px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            background-color: #080;
+        }
+    </style>
+    <script src="js/gtSpeed.js"></script>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('move');
+            var oBut = document.getElementById('but');
+            var oAlp = document.getElementById('alpha');
+
+            oBut.onclick = function(){
+                gtSpeed(oDiv,'left',500,9)
+            };
+            oAlp.onmouseover = function(){
+                gtSpeed(this,'opacity',100,3,function(){
+                    gtSpeed(this,'width',300,13)
+                })
+            };
+            oAlp.onmouseout = function(){
+                gtSpeed(this,'opacity',30,3,function(){
+                    gtSpeed(this,'width',150,13)
+                })
+            };
+            /*oAlp.onclick = function(){
+                gtSpeed(this,)
+            }*/
+        }
+    </script>
+</head>
+<body>
+    <div id="move"></div>
+    <div id="alpha"></div>
+    <input type="button" value="运动函数" id="but"/>
+</body>
+</html>
