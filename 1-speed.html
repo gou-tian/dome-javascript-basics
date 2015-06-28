@@ -16,36 +16,29 @@
             position: absolute;
             top: 150px;
             left: 100px;
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             opacity: 0.3;
             filter: alpha(opacity=30);
             background-color: #080;
         }
     </style>
-    <script src="js/gtSpeed.js"></script>
+    <script src="js/gtMove.js"></script>
     <script>
         window.onload = function(){
-            var oDiv = document.getElementById('move');
-            var oBut = document.getElementById('but');
+            //var oDiv = document.getElementById('move');
+            //var oBut = document.getElementById('but');
             var oAlp = document.getElementById('alpha');
-
-            oBut.onclick = function(){
-                gtSpeed(oDiv,'left',500,9)
+            oAlp.onclick = function(){
+                $gt(this,{
+                    "width":"300",
+                    "height":"400"
+                },10,function(){
+                    $gt(this,{
+                        'opacity' : 100
+                    },3)
+                });
             };
-            oAlp.onmouseover = function(){
-                gtSpeed(this,'opacity',100,3,function(){
-                    gtSpeed(this,'width',300,13)
-                })
-            };
-            oAlp.onmouseout = function(){
-                gtSpeed(this,'opacity',30,3,function(){
-                    gtSpeed(this,'width',150,13)
-                })
-            };
-            /*oAlp.onclick = function(){
-                gtSpeed(this,)
-            }*/
         }
     </script>
 </head>
