@@ -26,9 +26,9 @@ function $gt( obj,json,iSpeed,fn ){
                 num = parseInt(gtCss(obj,attr));
             }
 
-            if(num > iTarget && num > 0 || num < iTarget && num < 0){
+            /*if(num > iTarget && num > 0 || num < iTarget && num < 0){
                 num = iTarget;
-            }
+            }*/
 
             //如果num>iTarget的时候num=iTarget
             if(num != iTarget){
