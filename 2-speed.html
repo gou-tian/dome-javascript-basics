@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>摩擦运动</title>
+    <style>
+        #move {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            opacity: 0.3;
+            filter: alpha(opacity:30);
+            background-color: #dc143c;
+        }
+    </style>
+    <script src="js/gM.js"></script>
+    <script>
+        window.onload = function(){
+            var oMo = document.getElementById('move');
+
+            oMo.onclick = function(){
+                gt$(this,{
+                    "left" : 500
+                },function(){
+                    setTimeout(function(){
+                        gt$(oMo,{
+                            "top" : 200,
+                            "left" : 0
+                        })
+                    },1000)
+                })
+            };
+        }
+    </script>
+</head>
+<body>
+    <div id="move"></div>
+</body>
+</html>
