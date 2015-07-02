@@ -21,12 +21,8 @@
 字符串操作内容需要加强记忆和练习。
 **(注：谨记！如有多个相同的功能，可以先做出来一个，其他的用传参或是循环实现。)**
 ## 联系方式： ##
-[E-mail ---> goutian.521#gmail.com][1]
-[GitHub ---> https://github.com/gou-tian][2]
-[FaceBook ---> https://www.facebook.com/tian.gou.31][3]
-[Twitter ---> https://twitter.com/goutian9521][4]
-  [1]: mailto:goutian.521#gmail.com
-  [2]: https://github.com/gou-tian
-  [3]: https://www.facebook.com/tian.gou.31
-  [4]: https://twitter.com/goutian9521
+[E-mail ---> goutian.521#gmail.com](mailto:goutian.521#gmail.com)
+[GitHub ---> https://github.com/gou-tian](https://github.com/gou-tian)
+[FaceBook ---> https://www.facebook.com/tian.gou.31](https://www.facebook.com/tian.gou.31)
+[Twitter ---> https://twitter.com/goutian9521](https://twitter.com/goutian9521)
   电子邮件地址请手动换成@。
