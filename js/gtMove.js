@@ -25,11 +25,6 @@ function $gt( obj,json,iSpeed,fn ){
             }else{
                 num = parseInt(gtCss(obj,attr));
             }
-
-            /*if(num > iTarget && num > 0 || num < iTarget && num < 0){
-                num = iTarget;
-            }*/
-
             //如果num>iTarget的时候num=iTarget
             if(num != iTarget){
                 spdTar = false;
