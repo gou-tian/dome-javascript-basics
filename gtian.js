@@ -2,7 +2,7 @@
  * @author GouTian
  * @E-Mail goutian@foxmail.com
  * Created on 2016-04-14.
- * Last modified time 2016-04-16 
+ * Last modified time 2016-04-16
  */
 (function (window) {
   var tian = (function(){
@@ -174,11 +174,7 @@
       // 数据类型判断
       type: function(obj){
         var type = {}.toString;
-        if(typeof obj === 'object'){
-          return type.call(obj).split('object ').pop().trim().split(']').shift();
-        }else{
-          return typeof obj;
-        }
+        return type.call(obj).split('object ').pop().trim().split(']').shift();
       }
     };
     function getViewportWH(){
