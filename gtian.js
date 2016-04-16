@@ -6,7 +6,9 @@
  */
 (function (window) {
   var tian = (function(){
-    //Object.prototype.toString = function(){};
+    var type = {};
+    var toString = type.toString;
+
     var app = {
       // 获取css属性值
       css: function(obj,attr){
@@ -172,11 +174,11 @@
         }
       },
       // 数据类型判断
-      type: function(obj){
-        var type = {}.toString;
-        return type.call(obj).split('object ').pop().trim().split(']').shift();
+      type: function(obj) {
+        return toString.call(obj).split('object ').pop().trim().split(']').shift();
       }
     };
+
     function getViewportWH(){
       return {
         w : document.documentElement.clientWidth,
